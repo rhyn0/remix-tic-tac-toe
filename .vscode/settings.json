@@ -1,0 +1,27 @@
+{
+    "prettier.enable": true,
+    "prettier.configPath": ".prettierrc.json",
+    "eslint.enable": true,
+    "eslint.format.enable": false,
+    "eslint.experimental.useFlatConfig": true,
+    "eslint.options": {
+        "overrideConfigFile": "./eslint.config.js"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "inlineFold.regex": "(class|className)=[`'{\"]([^`'\"}]{30,})[`'\"}]",
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true,
+        "**/Thumbs.db": true
+    },
+    "workbench.editor.customLabels.patterns": {
+        "**/app/routes/**/route.tsx": "${dirname} - Route"
+    }
+}
