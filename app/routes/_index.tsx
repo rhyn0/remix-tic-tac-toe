@@ -1,5 +1,6 @@
 import React from "react";
+import TTTGame from "~/components/game";
 
-export default function GameBoard() {
-    return <div>GameBoard</div>;
+export default function Index() {
+    return <TTTGame />;
 }

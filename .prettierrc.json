@@ -4,5 +4,5 @@
     "trailingComma": "all",
     "singleQuote": false,
     "quoteProps": "consistent",
-    "bracketSameLine": true
+    "bracketSameLine": false
 }
