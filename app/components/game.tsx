@@ -1,21 +1,33 @@
 import React from "react";
 import Board from "~/components/board";
-import { TicTacToeValue } from "~/types";
+import { TicTacToeHistory, TicTacToeValue } from "~/types";
 import JumpToMove from "~/components/move-jumper";
 
 export default function TTTGame() {
-    const [gameHistory, setGameHistory] = React.useState<TicTacToeValue[][]>([
-        Array(9).fill(null),
+    const [gameHistory, setGameHistory] = React.useState<TicTacToeHistory[]>([
+        {
+            squares: Array(9).fill(null),
+            row: -1,
+            col: -1,
+        },
     ]);
     const [currentMoveNum, setCurrentMoveNum] = React.useState<number>(0);
 
     const isXTurn = currentMoveNum % 2 === 0;
     const squareValues = gameHistory[currentMoveNum];
 
-    const handleBoardClick = (nextSquares: TicTacToeValue[]): void => {
-        const nextHistory = [
+    const handleBoardClick = (
+        nextSquares: TicTacToeValue[],
+        clickedRow: number,
+        clickedCol: number,
+    ): void => {
+        const nextHistory: TicTacToeHistory[] = [
             ...gameHistory.slice(0, currentMoveNum + 1),
-            nextSquares,
+            {
+                squares: nextSquares,
+                row: clickedRow,
+                col: clickedCol,
+            },
         ];
         setGameHistory(nextHistory);
         setCurrentMoveNum(nextHistory.length - 1);
@@ -30,7 +42,7 @@ export default function TTTGame() {
             <div id="game-board">
                 <Board
                     isXTurn={isXTurn}
-                    squareValues={squareValues}
+                    squareValues={squareValues.squares}
                     handlePlay={handleBoardClick}
                 />
             </div>

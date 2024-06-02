@@ -1,9 +1,9 @@
 import React from "react";
-import { TicTacToeValue } from "~/types";
+import { TicTacToeHistory } from "~/types";
 import { Button } from "./ui/button";
 
 export interface JumpToMoveProps {
-    gameHistory: TicTacToeValue[][];
+    gameHistory: TicTacToeHistory[];
     onClick: (idx: number) => void;
     currentMove: number;
 }
@@ -13,25 +13,46 @@ export default function JumpToMove({
     onClick,
     currentMove,
 }: JumpToMoveProps) {
-    const buildDescription = React.useCallback((index: number) => {
+    const [isAscending, setIsAscending] = React.useState<boolean>(true);
+    const buildDescription = ({
+        index,
+        row,
+        col,
+    }: {
+        index: number;
+        row: number;
+        col: number;
+    }) => {
         if (index === 0) {
             return "Go to game start.";
+        } else if (index === currentMove) {
+            return `You are at move #${index}.`;
         } else {
-            return `Go to move #${index}.`;
+            return `Go to move #${index} - played (row: ${row + 1}, col: ${
+                col + 1
+            }).`;
         }
-    }, []);
+    };
+    const historyButtons = gameHistory.map((squares, idx) => (
+        <li key={idx}>
+            <Button onMouseDown={() => onClick(idx)} variant="secondary">
+                {buildDescription({
+                    index: idx,
+                    row: squares.row,
+                    col: squares.col,
+                })}
+            </Button>
+        </li>
+    ));
+    if (!isAscending) {
+        historyButtons.reverse();
+    }
     return (
-        <ol>
-            {gameHistory.slice(0, currentMove).map((_squares, idx) => (
-                <li key={idx}>
-                    <Button
-                        onMouseDown={() => onClick(idx)}
-                        variant="secondary"
-                    >
-                        {buildDescription(idx)}
-                    </Button>
-                </li>
-            ))}
-        </ol>
+        <div className="flex flex-col">
+            <Button onMouseDown={() => setIsAscending((prev) => !prev)}>
+                Sort Toggle
+            </Button>
+            <ol>{historyButtons}</ol>
+        </div>
     );
 }
