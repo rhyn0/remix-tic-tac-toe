@@ -1,9 +1,9 @@
-import { isRouteErrorResponse, useRouteError } from "@remix-run/react";
-import React from "react";
-import TTTGame from "~/components/game";
+import { isRouteErrorResponse, useRouteError } from "@remix-run/react"
+import React from "react"
+import TTTGame from "~/components/game"
 
 export function ErrorBoundary() {
-    const error = useRouteError();
+    const error = useRouteError()
     if (isRouteErrorResponse(error)) {
         return (
             <div>
@@ -12,8 +12,9 @@ export function ErrorBoundary() {
                 </h1>
                 <p>{error.data}</p>
             </div>
-        );
-    } else if (error instanceof Error) {
+        )
+    }
+    if (error instanceof Error) {
         return (
             <div>
                 <h1>Error</h1>
@@ -21,12 +22,11 @@ export function ErrorBoundary() {
                 <p>The stack trace is:</p>
                 <pre>{error.stack}</pre>
             </div>
-        );
-    } else {
-        return <h1>Unknown Error</h1>;
+        )
     }
+    return <h1>Unknown Error</h1>
 }
 
 export default function Index() {
-    return <TTTGame />;
+    return <TTTGame />
 }

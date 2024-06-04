@@ -1,14 +1,14 @@
-import { Link } from "@remix-run/react";
-import React from "react";
-import { Hash } from "lucide-react";
-import { cn } from "~/lib/utils";
-import siteConfig from "~/config";
-import { buttonVariants } from "./ui/button";
-import { Icons } from "~/icons";
-import { ThemePicker } from "./theme-picker";
+import { Link } from "@remix-run/react"
+import React from "react"
+import { Hash } from "lucide-react"
+import { cn } from "~/lib/utils"
+import siteConfig from "~/config"
+import { buttonVariants } from "./ui/button"
+import { Icons } from "~/icons"
+import { ThemePicker } from "./theme-picker"
 
 export interface HeaderProps {
-    className?: string;
+    className?: string
 }
 export default function Header({ className }: HeaderProps) {
     return (
@@ -45,5 +45,5 @@ export default function Header({ className }: HeaderProps) {
                 </div>
             </div>
         </header>
-    );
+    )
 }

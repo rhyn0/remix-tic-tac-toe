@@ -1,9 +1,9 @@
-import { themes } from "./components/providers/theme";
+import type { themes } from "./components/providers/theme"
 
-export type TicTacToeValue = "x" | "o" | null;
+export type TicTacToeValue = "x" | "o" | null
 export interface TicTacToeHistory {
-    squares: TicTacToeValue[];
-    row: number;
-    col: number;
+    squares: TicTacToeValue[]
+    row: number
+    col: number
 }
-export type Theme = (typeof themes)[number];
+export type Theme = (typeof themes)[number]

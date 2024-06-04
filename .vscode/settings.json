@@ -1,13 +1,10 @@
 {
-    "prettier.enable": true,
-    "prettier.configPath": ".prettierrc.json",
-    "eslint.enable": true,
+    "prettier.enable": false,
+    "eslint.enable": false,
     "eslint.format.enable": false,
-    "eslint.experimental.useFlatConfig": true,
-    "eslint.options": {
-        "overrideConfigFile": "./eslint.config.js"
-    },
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "biome.enabled": true,
+    "biome.lspBin": "./node_modules/.bin/biome",
+    "editor.defaultFormatter": "biomejs.biome",
     "editor.formatOnSave": true,
     "editor.insertSpaces": true,
     "editor.tabSize": 4,
@@ -23,5 +20,8 @@
     },
     "workbench.editor.customLabels.patterns": {
         "**/app/routes/**/route.tsx": "${dirname} - Route"
+    },
+    "editor.codeActionsOnSave": {
+        "quickfix.biome": "explicit"
     }
 }

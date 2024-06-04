@@ -1,11 +1,11 @@
-import React from "react";
-import { TicTacToeHistory } from "~/types";
-import { Button } from "./ui/button";
+import React from "react"
+import type { TicTacToeHistory } from "~/types"
+import { Button } from "./ui/button"
 
 export interface JumpToMoveProps {
-    gameHistory: TicTacToeHistory[];
-    onClick: (idx: number) => void;
-    currentMove: number;
+    gameHistory: TicTacToeHistory[]
+    onClick: (idx: number) => void
+    currentMove: number
 }
 
 export default function JumpToMove({
@@ -13,27 +13,28 @@ export default function JumpToMove({
     onClick,
     currentMove,
 }: JumpToMoveProps) {
-    const [isAscending, setIsAscending] = React.useState<boolean>(true);
+    const [isAscending, setIsAscending] = React.useState<boolean>(true)
     const buildDescription = ({
         index,
         row,
         col,
     }: {
-        index: number;
-        row: number;
-        col: number;
+        index: number
+        row: number
+        col: number
     }) => {
         if (index === 0) {
-            return "Go to game start.";
-        } else if (index === currentMove) {
-            return `You are at move #${index}.`;
-        } else {
-            return `Go to move #${index} - played (row: ${row + 1}, col: ${
-                col + 1
-            }).`;
+            return "Go to game start."
         }
-    };
+        if (index === currentMove) {
+            return `You are at move #${index}.`
+        }
+        return `Go to move #${index} - played (row: ${row + 1}, col: ${
+            col + 1
+        }).`
+    }
     const historyButtons = gameHistory.map((squares, idx) => (
+        // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
         <li key={idx}>
             <Button onMouseDown={() => onClick(idx)} variant="secondary">
                 {buildDescription({
@@ -43,9 +44,9 @@ export default function JumpToMove({
                 })}
             </Button>
         </li>
-    ));
+    ))
     if (!isAscending) {
-        historyButtons.reverse();
+        historyButtons.reverse()
     }
     return (
         <div className="flex flex-col">
@@ -54,5 +55,5 @@ export default function JumpToMove({
             </Button>
             <ol>{historyButtons}</ol>
         </div>
-    );
+    )
 }
