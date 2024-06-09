@@ -1,3 +1,3 @@
-npm run lint:rules
-npm run lint:format
+npm run lint:rules --staged
+npm run lint:format --staged
 npm run lint:types

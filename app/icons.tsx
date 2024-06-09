@@ -1,5 +1,5 @@
-import type React from "react"
-export type IconProps = React.HTMLAttributes<SVGElement>
+import type React from "react";
+export type IconProps = React.HTMLAttributes<SVGElement>;
 
 export const Icons = {
     github: (props: IconProps) => (
@@ -11,4 +11,4 @@ export const Icons = {
             />
         </svg>
     ),
-}
+};

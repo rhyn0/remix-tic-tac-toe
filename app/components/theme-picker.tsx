@@ -1,16 +1,16 @@
-import React from "react"
-import { Moon, Sun } from "lucide-react"
-import { useTheme } from "./providers/theme"
+import React from "react";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "./providers/theme";
 
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuTrigger,
-} from "~/components/ui/dropdown-menu"
+} from "~/components/ui/dropdown-menu";
 
 export function ThemePicker() {
-    const [, setTheme] = useTheme()
+    const [, setTheme] = useTheme();
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
@@ -30,5 +30,5 @@ export function ThemePicker() {
                 </DropdownMenuItem>
             </DropdownMenuContent>
         </DropdownMenu>
-    )
+    );
 }

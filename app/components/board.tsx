@@ -1,11 +1,11 @@
-import React from "react"
-import Square from "./square"
-import type { TicTacToeValue } from "~/types"
-import { cn } from "~/lib/utils"
+import React from "react";
+import Square from "./square";
+import type { TicTacToeValue } from "~/types";
+import { cn } from "~/lib/utils";
 
 function calculateWinner(squares: TicTacToeValue[]): {
-    winner: TicTacToeValue
-    winningSquares: number[] | null
+    winner: TicTacToeValue;
+    winningSquares: number[] | null;
 } {
     const lines = [
         [0, 1, 2],
@@ -16,7 +16,7 @@ function calculateWinner(squares: TicTacToeValue[]): {
         [2, 5, 8],
         [0, 4, 8],
         [2, 4, 6],
-    ]
+    ];
     for (const [a, b, c] of lines) {
         if (
             squares[a] &&
@@ -26,24 +26,24 @@ function calculateWinner(squares: TicTacToeValue[]): {
             return {
                 winner: squares[a],
                 winningSquares: [a, b, c],
-            }
+            };
         }
     }
     return {
         winner: null,
         winningSquares: null,
-    }
+    };
 }
 
 export interface BoardProps {
-    isXTurn: boolean
-    squareValues: TicTacToeValue[]
+    isXTurn: boolean;
+    squareValues: TicTacToeValue[];
     handlePlay: (
         nextSquares: TicTacToeValue[],
         clickedRow: number,
         clickedCol: number,
-    ) => void
-    boardSize?: number
+    ) => void;
+    boardSize?: number;
 }
 
 export default function Board({
@@ -54,19 +54,19 @@ export default function Board({
 }: BoardProps) {
     const handleSquareClick = (idx: number) => {
         // don't allow choosing already chosen squares
-        const { winner } = calculateWinner(squareValues)
+        const { winner } = calculateWinner(squareValues);
         if (squareValues[idx] || winner) {
-            return
+            return;
         }
 
-        const newValues = squareValues.slice()
-        newValues[idx] = isXTurn ? "x" : "o"
-        const row = Math.floor(idx / boardSize)
-        const col = idx % boardSize
-        handlePlay(newValues, row, col)
-    }
-    const { winner, winningSquares } = calculateWinner(squareValues)
-    const status = buildStatus({ winner, squareValues, isXTurn })
+        const newValues = squareValues.slice();
+        newValues[idx] = isXTurn ? "x" : "o";
+        const row = Math.floor(idx / boardSize);
+        const col = idx % boardSize;
+        handlePlay(newValues, row, col);
+    };
+    const { winner, winningSquares } = calculateWinner(squareValues);
+    const status = buildStatus({ winner, squareValues, isXTurn });
     return (
         <div>
             <h1 className="text-bold text-2xl text-black text-center">
@@ -84,7 +84,7 @@ export default function Board({
                             {Array(boardSize)
                                 .fill(null)
                                 .map((_, innerIdx) => {
-                                    const squareIdx = 3 * idx + innerIdx
+                                    const squareIdx = 3 * idx + innerIdx;
                                     return (
                                         <Square
                                             key={`cell-${squareIdx}`}
@@ -101,13 +101,13 @@ export default function Board({
                                                     ),
                                             })}
                                         />
-                                    )
+                                    );
                                 })}
                         </div>
                     ))}
             </div>
         </div>
-    )
+    );
 }
 
 function buildStatus({
@@ -115,15 +115,15 @@ function buildStatus({
     squareValues,
     isXTurn,
 }: {
-    winner: TicTacToeValue
-    squareValues: TicTacToeValue[]
-    isXTurn: boolean
+    winner: TicTacToeValue;
+    squareValues: TicTacToeValue[];
+    isXTurn: boolean;
 }) {
     if (winner) {
-        return `Winner is ${winner}.`
+        return `Winner is ${winner}.`;
     }
     if (!squareValues.every(Boolean)) {
-        return `Next player is ${isXTurn ? "X" : "O"}.`
+        return `Next player is ${isXTurn ? "X" : "O"}.`;
     }
-    return "It's a draw."
+    return "It's a draw.";
 }

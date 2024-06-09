@@ -1,16 +1,16 @@
-import React from "react"
-import { cn } from "~/lib/utils"
-import type { TicTacToeValue } from "~/types"
-import { X, Circle } from "lucide-react"
+import React from "react";
+import { cn } from "~/lib/utils";
+import type { TicTacToeValue } from "~/types";
+import { X, Circle } from "lucide-react";
 
 export interface SquareProps
     extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    squareValue: TicTacToeValue
+    squareValue: TicTacToeValue;
 }
 
 const Square = React.forwardRef<HTMLButtonElement, SquareProps>(
     ({ squareValue: value, className, ...rest }, ref) => {
-        const internalValue = !value ? "" : value === "o" ? <Circle /> : <X />
+        const internalValue = !value ? "" : value === "o" ? <Circle /> : <X />;
         return (
             <button
                 ref={ref}
@@ -22,10 +22,10 @@ const Square = React.forwardRef<HTMLButtonElement, SquareProps>(
             >
                 {internalValue}
             </button>
-        )
+        );
     },
-)
+);
 
-Square.displayName = "Square"
+Square.displayName = "Square";
 
-export default Square
+export default Square;

@@ -1,7 +1,7 @@
-import React from "react"
-import Board from "~/components/board"
-import type { TicTacToeHistory, TicTacToeValue } from "~/types"
-import JumpToMove from "~/components/move-jumper"
+import React from "react";
+import Board from "~/components/board";
+import type { TicTacToeHistory, TicTacToeValue } from "~/types";
+import JumpToMove from "~/components/move-jumper";
 
 export default function TTTGame() {
     const [gameHistory, setGameHistory] = React.useState<TicTacToeHistory[]>([
@@ -10,11 +10,11 @@ export default function TTTGame() {
             row: -1,
             col: -1,
         },
-    ])
-    const [currentMoveNum, setCurrentMoveNum] = React.useState<number>(0)
+    ]);
+    const [currentMoveNum, setCurrentMoveNum] = React.useState<number>(0);
 
-    const isXTurn = currentMoveNum % 2 === 0
-    const squareValues = gameHistory[currentMoveNum]
+    const isXTurn = currentMoveNum % 2 === 0;
+    const squareValues = gameHistory[currentMoveNum];
 
     const handleBoardClick = (
         nextSquares: TicTacToeValue[],
@@ -28,14 +28,14 @@ export default function TTTGame() {
                 row: clickedRow,
                 col: clickedCol,
             },
-        ]
-        setGameHistory(nextHistory)
-        setCurrentMoveNum(nextHistory.length - 1)
-    }
+        ];
+        setGameHistory(nextHistory);
+        setCurrentMoveNum(nextHistory.length - 1);
+    };
 
     const handleHistoryClick = React.useCallback((index: number) => {
-        setCurrentMoveNum(index)
-    }, [])
+        setCurrentMoveNum(index);
+    }, []);
 
     return (
         <div className="flex flex-row space-x-10 justify-center">
@@ -54,5 +54,5 @@ export default function TTTGame() {
                 />
             </div>
         </div>
-    )
+    );
 }
