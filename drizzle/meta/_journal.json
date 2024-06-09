@@ -1,0 +1,27 @@
+{
+    "version": "7",
+    "dialect": "sqlite",
+    "entries": [
+        {
+            "idx": 0,
+            "version": "6",
+            "when": 1717902536895,
+            "tag": "0000_quiet_blur",
+            "breakpoints": true
+        },
+        {
+            "idx": 1,
+            "version": "6",
+            "when": 1717902725344,
+            "tag": "0001_many_mac_gargan",
+            "breakpoints": true
+        },
+        {
+            "idx": 2,
+            "version": "6",
+            "when": 1717904436508,
+            "tag": "0002_cheerful_katie_power",
+            "breakpoints": true
+        }
+    ]
+}
