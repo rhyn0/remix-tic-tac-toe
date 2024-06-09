@@ -35,6 +35,8 @@ function calculateWinner(squares: TicTacToeValue[]): {
     };
 }
 
+type XPlayerName = string;
+type OPlayerName = string;
 export interface BoardProps {
     isXTurn: boolean;
     squareValues: TicTacToeValue[];
@@ -44,6 +46,7 @@ export interface BoardProps {
         clickedCol: number,
     ) => void;
     boardSize?: number;
+    playerNames: [XPlayerName, OPlayerName];
 }
 
 export default function Board({
@@ -51,6 +54,7 @@ export default function Board({
     squareValues,
     handlePlay,
     boardSize = 3,
+    playerNames,
 }: BoardProps) {
     const handleSquareClick = (idx: number) => {
         // don't allow choosing already chosen squares
@@ -66,7 +70,7 @@ export default function Board({
         handlePlay(newValues, row, col);
     };
     const { winner, winningSquares } = calculateWinner(squareValues);
-    const status = buildStatus({ winner, squareValues, isXTurn });
+    const status = buildStatus({ winner, squareValues, isXTurn, playerNames });
     return (
         <div>
             <h1 className="text-bold text-2xl text-black text-center">
@@ -114,16 +118,20 @@ function buildStatus({
     winner,
     squareValues,
     isXTurn,
+    playerNames,
 }: {
     winner: TicTacToeValue;
     squareValues: TicTacToeValue[];
     isXTurn: boolean;
+    playerNames: [string, string];
 }) {
     if (winner) {
-        return `Winner is ${winner}.`;
+        return `Winner is ${winner} - ${
+            winner === "x" ? playerNames[0] : playerNames[1]
+        }.`;
     }
     if (!squareValues.every(Boolean)) {
-        return `Next player is ${isXTurn ? "X" : "O"}.`;
+        return `Next player is ${isXTurn ? playerNames[0] : playerNames[1]}.`;
     }
     return "It's a draw.";
 }

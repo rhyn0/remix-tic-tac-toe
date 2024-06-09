@@ -12,8 +12,10 @@ const games = sqliteTable("games", {
     squares: text("squares", { mode: "json" })
         .notNull()
         .$type<TicTacToeValue[]>(),
+    currentMoveNum: integer("current_move_num").notNull().default(0),
     lastPlayTime: integer("last_modified", { mode: "timestamp" })
         .default(sql`(unixepoch())`)
         .$onUpdate(() => new Date()),
 });
+
 export { games };

@@ -2,11 +2,27 @@ import React from "react";
 import Board from "~/components/board";
 import type { TicTacToeHistory, TicTacToeValue } from "~/types";
 import JumpToMove from "~/components/move-jumper";
+import { cn } from "~/lib/utils";
 
-export default function TTTGame() {
+export interface TTTGameProps {
+    disableHistory?: boolean;
+    onPlay: (sq: TicTacToeValue[], currentMove: number) => void;
+    squares: TicTacToeValue[];
+    xPlayerName: string;
+    oPlayerName: string;
+    boardSize: number;
+}
+export default function TTTGame({
+    disableHistory = false,
+    onPlay,
+    squares,
+    xPlayerName,
+    oPlayerName,
+    boardSize,
+}: TTTGameProps) {
     const [gameHistory, setGameHistory] = React.useState<TicTacToeHistory[]>([
         {
-            squares: Array(9).fill(null),
+            squares,
             row: -1,
             col: -1,
         },
@@ -21,6 +37,7 @@ export default function TTTGame() {
         clickedRow: number,
         clickedCol: number,
     ): void => {
+        onPlay(nextSquares, currentMoveNum);
         const nextHistory: TicTacToeHistory[] = [
             ...gameHistory.slice(0, currentMoveNum + 1),
             {
@@ -44,9 +61,11 @@ export default function TTTGame() {
                     isXTurn={isXTurn}
                     squareValues={squareValues.squares}
                     handlePlay={handleBoardClick}
+                    boardSize={boardSize}
+                    playerNames={[xPlayerName, oPlayerName]}
                 />
             </div>
-            <div id="game-info">
+            <div id="game-info" className={cn({ hidden: disableHistory })}>
                 <JumpToMove
                     gameHistory={gameHistory}
                     onClick={handleHistoryClick}

@@ -13,18 +13,13 @@ import { Input } from "~/components/ui/input";
 import { X, Circle } from "lucide-react";
 import { NewGameZ } from "~/types";
 import { createNewGame } from "~/lib/game-db";
+import { formatZodError } from "~/lib/error";
 
 export async function action({ request }: ActionFunctionArgs) {
     const formData = await request.formData();
     const gameData = NewGameZ.safeParse(Object.fromEntries(formData));
     if (!gameData.success) {
-        const perFieldErrors = gameData.error.errors.reduce(
-            (errors: Record<string, string>, issue) => {
-                errors[issue.path[0]] = issue.message;
-                return errors;
-            },
-            {},
-        );
+        const perFieldErrors = formatZodError(gameData);
         return json(
             {
                 message: "Invalid Game details submitted.",
@@ -34,7 +29,6 @@ export async function action({ request }: ActionFunctionArgs) {
         );
     }
     const id = await createNewGame(gameData.data);
-    console.log("🚀 ~ action ~ id:", id);
     if (!id) {
         throw new Response("Internal Server Error", { status: 500 });
     }

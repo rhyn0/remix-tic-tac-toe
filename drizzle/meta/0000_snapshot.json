@@ -1,7 +1,7 @@
 {
     "version": "6",
     "dialect": "sqlite",
-    "id": "41bdb75f-ef39-4898-8ec1-f506b77a59be",
+    "id": "550a6cb0-d5e7-4cbe-9253-f96000fee90b",
     "prevId": "00000000-0000-0000-0000-000000000000",
     "tables": {
         "games": {
@@ -49,13 +49,21 @@
                     "notNull": true,
                     "autoincrement": false
                 },
+                "current_move_num": {
+                    "name": "current_move_num",
+                    "type": "integer",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "autoincrement": false,
+                    "default": 0
+                },
                 "last_modified": {
                     "name": "last_modified",
                     "type": "integer",
                     "primaryKey": false,
                     "notNull": false,
                     "autoincrement": false,
-                    "default": "strftime('%Y-%m-%dT%H-%M-%fZ', 'now')"
+                    "default": "(unixepoch())"
                 }
             },
             "indexes": {

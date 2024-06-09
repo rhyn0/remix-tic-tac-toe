@@ -5,7 +5,8 @@ CREATE TABLE `games` (
 	`player_1_name` text NOT NULL,
 	`player_2_name` text NOT NULL,
 	`squares` text NOT NULL,
-	`last_modified` integer DEFAULT strftime('%Y-%m-%dT%H-%M-%fZ', 'now')
+	`current_move_num` integer DEFAULT 0 NOT NULL,
+	`last_modified` integer DEFAULT (unixepoch())
 );
 --> statement-breakpoint
 CREATE UNIQUE INDEX `games_display_id_unique` ON `games` (`display_id`);

@@ -1,4 +1,10 @@
-import { GameZ, type GameId, type GameT, type NewGameT } from "~/types";
+import {
+    GameZ,
+    type TicTacToeValue,
+    type GameId,
+    type GameT,
+    type NewGameT,
+} from "~/types";
 import { db } from "./db";
 import { eq } from "drizzle-orm";
 import { games } from "~/db/schema";
@@ -6,9 +12,9 @@ import { inspect } from "node:util";
 // Collection of actions to update the database for each game.
 export async function createNewGame(data: NewGameT): Promise<GameId | null> {
     const displayId = crypto.randomUUID();
-    const defaultSquares = Array(data.boardDimensions).fill(
-        Array(data.boardDimensions).fill(null),
-    );
+    const defaultSquares = Array(
+        data.boardDimensions * data.boardDimensions,
+    ).fill(null);
     try {
         await db.insert(games).values({
             ...data,
@@ -41,5 +47,29 @@ export async function getSpecificGame(id: GameId): Promise<GameT | null> {
     } catch (e) {
         console.error(e);
         return null;
+    }
+}
+export async function updateGameSquares(
+    gameId: GameId,
+    {
+        squares,
+        currentMove,
+    }: {
+        squares: TicTacToeValue[];
+        currentMove: number;
+    },
+): Promise<boolean> {
+    try {
+        await db
+            .update(games)
+            .set({
+                squares,
+                currentMoveNum: currentMove,
+            })
+            .where(eq(games.displayId, gameId));
+        return true;
+    } catch (e) {
+        console.error("Failed to update DB", e);
+        return false;
     }
 }
