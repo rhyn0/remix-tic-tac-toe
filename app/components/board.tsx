@@ -2,38 +2,7 @@ import React from "react";
 import Square from "./square";
 import type { TicTacToeValue } from "~/types";
 import { cn } from "~/lib/utils";
-
-function calculateWinner(squares: TicTacToeValue[]): {
-    winner: TicTacToeValue;
-    winningSquares: number[] | null;
-} {
-    const lines = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-    ];
-    for (const [a, b, c] of lines) {
-        if (
-            squares[a] &&
-            squares[a] === squares[b] &&
-            squares[a] === squares[c]
-        ) {
-            return {
-                winner: squares[a],
-                winningSquares: [a, b, c],
-            };
-        }
-    }
-    return {
-        winner: null,
-        winningSquares: null,
-    };
-}
+import { calculateWinner } from "~/lib/calculateWinner";
 
 type XPlayerName = string;
 type OPlayerName = string;
@@ -131,7 +100,9 @@ function buildStatus({
         }.`;
     }
     if (!squareValues.every(Boolean)) {
-        return `Next player is ${isXTurn ? playerNames[0] : playerNames[1]}.`;
+        return `Next player is ${
+            isXTurn ? `X - ${playerNames[0]}` : `O - ${playerNames[1]}`
+        }.`;
     }
     return "It's a draw.";
 }

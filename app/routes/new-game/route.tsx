@@ -110,9 +110,6 @@ export default function NewGameForm() {
                             name="boardDimensions"
                             type="number"
                             defaultValue="3"
-                            onChange={(e) => {
-                                e.target.value = "3";
-                            }}
                         />
                         {actionData?.detail ? (
                             <span className="text-red-500">
