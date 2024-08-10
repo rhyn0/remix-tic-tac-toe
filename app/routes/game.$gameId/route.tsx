@@ -4,12 +4,10 @@ import {
     json,
     redirect,
     useActionData,
-    useFetcher,
     useLoaderData,
     useRouteError,
     useSubmit,
 } from "@remix-run/react";
-import React from "react";
 import invariant from "tiny-invariant";
 import TTTGame from "~/components/game";
 import { formatZodError } from "~/lib/error";
