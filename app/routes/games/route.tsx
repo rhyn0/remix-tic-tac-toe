@@ -1,5 +1,6 @@
-import { json, type LoaderFunctionArgs } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
+import { Button } from "~/components/ui/button";
 import { getOngoingGames } from "~/lib/game-db";
 
 export async function loader() {
@@ -10,15 +11,16 @@ export async function loader() {
 export default function ContinueGamePage() {
     const { games } = useLoaderData<typeof loader>();
     return (
-        <main>
-            <h1>ContinueGamePage</h1>
-            <div>
+        <div className="flex w-full h-full justify-center">
+            <div className="flex flex-col space-y-4 justify-center mx-10">
                 {games.map((g) => (
-                    <div key={g.displayId}>
-                        {`Game on ${g.boardDimensions}x${g.boardDimensions} between ${g.player1Name} and ${g.player2Name}`}
-                    </div>
+                    <Button asChild key={g.displayId} variant="outline">
+                        <Link to={`/game/${g.displayId}`}>
+                            {`Game on ${g.boardDimensions}x${g.boardDimensions} between ${g.player1Name} and ${g.player2Name}`}
+                        </Link>
+                    </Button>
                 ))}
             </div>
-        </main>
+        </div>
     );
 }
