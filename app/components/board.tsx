@@ -1,4 +1,3 @@
-import React from "react";
 import Square from "./square";
 import type { TicTacToeValue } from "~/types";
 import { cn } from "~/lib/utils";

@@ -1,5 +1,4 @@
 import { Link } from "@remix-run/react";
-import React from "react";
 import { Hash } from "lucide-react";
 import { cn } from "~/lib/utils";
 import siteConfig from "~/config";
