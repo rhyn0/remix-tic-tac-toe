@@ -15,7 +15,7 @@
         "lint:rules": "biome lint --error-on-warnings ./",
         "fix": "npm run fix:format && npm run fix:lint",
         "fix:format": "biome format --write ./",
-        "fix:lint": "biome lint --apply ./",
+        "fix:lint": "biome lint --write ./",
         "db:generate": "drizzle-kit generate",
         "db:push": "drizzle-kit push",
         "db:migrate": "drizzle-kit migrate",
@@ -42,7 +42,7 @@
         "zod": "^3.23.8"
     },
     "devDependencies": {
-        "@biomejs/biome": "1.7.3",
+        "@biomejs/biome": "^1.8.3",
         "@remix-run/dev": "^2.9.2",
         "@types/better-sqlite3": "^7.6.10",
         "@types/react": "^18.2.20",
