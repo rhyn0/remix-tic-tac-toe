@@ -11,6 +11,7 @@ export interface TTTGameProps {
     xPlayerName: string;
     oPlayerName: string;
     boardSize: number;
+    currentMoveNum: number;
 }
 export default function TTTGame({
     disableHistory = false,
@@ -19,6 +20,7 @@ export default function TTTGame({
     xPlayerName,
     oPlayerName,
     boardSize,
+    currentMoveNum: givenCurrentMove,
 }: TTTGameProps) {
     const [gameHistory, setGameHistory] = React.useState<TicTacToeHistory[]>([
         {
@@ -27,17 +29,19 @@ export default function TTTGame({
             col: -1,
         },
     ]);
-    const [currentMoveNum, setCurrentMoveNum] = React.useState<number>(0);
+    const [currentMoveNum, setCurrentMoveNum] =
+        React.useState<number>(givenCurrentMove);
 
     const isXTurn = currentMoveNum % 2 === 0;
-    const squareValues = gameHistory[currentMoveNum];
+    const squareValues =
+        gameHistory[Math.min(currentMoveNum, gameHistory.length - 1)];
 
     const handleBoardClick = (
         nextSquares: TicTacToeValue[],
         clickedRow: number,
         clickedCol: number,
     ): void => {
-        onPlay(nextSquares, currentMoveNum);
+        onPlay(nextSquares, currentMoveNum + 1);
         const nextHistory: TicTacToeHistory[] = [
             ...gameHistory.slice(0, currentMoveNum + 1),
             {
@@ -47,7 +51,7 @@ export default function TTTGame({
             },
         ];
         setGameHistory(nextHistory);
-        setCurrentMoveNum(nextHistory.length - 1);
+        setCurrentMoveNum(currentMoveNum + 1);
     };
 
     const handleHistoryClick = React.useCallback((index: number) => {
