@@ -96,11 +96,12 @@ export default function Index() {
     return (
         <TTTGame
             disableHistory
-            boardSize={game.boardDimensions}
             onPlay={handlePlay}
+            boardSize={game.boardDimensions}
             squares={game.squares}
             xPlayerName={game.player1Name}
             oPlayerName={game.player2Name}
+            currentMoveNum={game.currentMoveNum}
         />
     );
 }
