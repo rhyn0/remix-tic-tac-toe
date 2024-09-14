@@ -1,3 +1,4 @@
 npm run lint:rules --staged
 npm run lint:format --staged
 npm run lint:types
+npm run test
