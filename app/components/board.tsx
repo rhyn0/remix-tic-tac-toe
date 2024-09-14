@@ -1,7 +1,7 @@
 import Square from "./square";
 import type { TicTacToeValue } from "~/types";
 import { cn } from "~/lib/utils";
-import { calculateWinner } from "~/lib/calculateWinner";
+import calculateWinner from "~/lib/board-logic";
 
 type XPlayerName = string;
 type OPlayerName = string;
