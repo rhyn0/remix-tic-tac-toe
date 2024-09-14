@@ -4,11 +4,19 @@
     "eslint.format.enable": false,
     "biome.enabled": true,
     "biome.lspBin": "./node_modules/.bin/biome",
+    // testing in vscode
+    // easiest to cmd+shift+p and Test: Start Continuous Run
+    "testing.alwaysRevealTestOnStateChange": true,
+    "testing.automaticallyOpenPeekViewDuringAutoRun": true,
+    "testing.automaticallyOpenPeekView": "failureInVisibleDocument",
+    "testing.openTesting": "openOnTestFailure",
+    // editor view settings
     "editor.defaultFormatter": "biomejs.biome",
     "editor.formatOnSave": true,
     "editor.insertSpaces": true,
     "editor.tabSize": 4,
     "inlineFold.regex": "(class|className)=[`'{\"]([^`'\"}]{30,})[`'\"}]",
+    "inlineFold.maskChar": "⌨",
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,

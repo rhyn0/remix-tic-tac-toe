@@ -1,5 +1,6 @@
-import { vitePlugin as remix } from "@remix-run/dev";
+/// <reference types="vitest/config" />
 import { defineConfig } from "vite";
+import { vitePlugin as remix } from "@remix-run/dev";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
@@ -13,4 +14,9 @@ export default defineConfig({
         }),
         tsconfigPaths(),
     ],
+    test: {
+        environment: "jsdom",
+        setupFiles: ["./vitest.setup.ts"],
+        reporters: ["basic"],
+    },
 });

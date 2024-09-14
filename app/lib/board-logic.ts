@@ -1,11 +1,14 @@
 import type { TicTacToeValue } from "~/types";
 import { range } from "./range";
 
-interface WinnerReturn {
+export interface WinnerReturn {
     winner: TicTacToeValue;
     winningSquares: number[] | null;
 }
-function rowWinner(squares: TicTacToeValue[], rowLength: number): WinnerReturn {
+export function rowWinner(
+    squares: TicTacToeValue[],
+    rowLength: number,
+): WinnerReturn {
     // rows are appended to each other, so we scan for repeated values in a tumbling window
     for (let idx = 0; idx < squares.length; idx += rowLength) {
         const row = squares.slice(idx, idx + rowLength);
@@ -25,13 +28,23 @@ function rowWinner(squares: TicTacToeValue[], rowLength: number): WinnerReturn {
         winningSquares: null,
     };
 }
-function colWinner(squares: TicTacToeValue[], colLength: number): WinnerReturn {
+export function colWinner(
+    squares: TicTacToeValue[],
+    colLength: number,
+): WinnerReturn {
     // columns are every idx that is at same remainder as previous
-    const columns = squares.reduce((acc, el, idx) => {
-        const colIdx = idx % colLength;
-        acc[colIdx].push(el);
-        return acc;
-    }, Array(colLength).fill([]) as TicTacToeValue[][]);
+    const columns = squares.reduce(
+        (acc, el, idx) => {
+            const colIdx = idx % colLength;
+            acc[colIdx].push(el);
+            return acc;
+        },
+        Array(colLength)
+            .fill(null)
+            // careful as filling with a singular Array call (or [])
+            // will copy the reference to that value
+            .map(() => new Array()) as TicTacToeValue[][],
+    );
 
     const winner = columns.reduce(
         (winner, column, colIdx) => {
@@ -59,7 +72,7 @@ function colWinner(squares: TicTacToeValue[], colLength: number): WinnerReturn {
 
     return winner;
 }
-function diagonalWinner(
+export function diagonalWinner(
     squares: TicTacToeValue[],
     length: number,
 ): WinnerReturn {
@@ -110,7 +123,9 @@ function diagonalWinner(
     };
 }
 
-export function calculateWinner(squares: TicTacToeValue[]): WinnerReturn {
+export default function calculateWinner(
+    squares: TicTacToeValue[],
+): WinnerReturn {
     const size = Math.round(Math.sqrt(squares.length));
     const funcs = [rowWinner, colWinner, diagonalWinner];
     for (const f of funcs) {
