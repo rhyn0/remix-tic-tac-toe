@@ -3,7 +3,6 @@ import {
     isRouteErrorResponse,
     json,
     redirect,
-    useActionData,
     useLoaderData,
     useRouteError,
     useSubmit,
@@ -83,11 +82,8 @@ export async function action({ request, params }: ActionFunctionArgs) {
 
 export default function Index() {
     const { game } = useLoaderData<typeof loader>();
-    const data = useActionData<typeof action>();
     const submit = useSubmit();
 
-    const successfulMove = data ? data.message === "Success" : null;
-    console.log("🚀 ~ Index ~ successfulMove:", successfulMove);
     const handlePlay = (squares: TicTacToeValue[], currentMove: number) => {
         submit(
             {
