@@ -41,7 +41,7 @@ export default function Board({
     const status = buildStatus({ winner, squareValues, isXTurn, playerNames });
     return (
         <div>
-            <h1 className="text-bold text-2xl text-black text-center">
+            <h1 className="text-bold text-2xl text-primary text-center">
                 {status}
             </h1>
             <div className="grid gap-0 grid-rows-3 w-fit h-fit mx-auto overflow-hidden box-border">
@@ -66,7 +66,7 @@ export default function Board({
                                             onMouseDown={() =>
                                                 handleSquareClick(squareIdx)
                                             }
-                                            className={cn("bg-white", {
+                                            className={cn("bg-secondary", {
                                                 "bg-green-300":
                                                     winningSquares?.includes(
                                                         squareIdx,
